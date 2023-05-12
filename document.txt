@@ -1,0 +1,4 @@
+> node
+Welcome to Node.js v16.16.0.
+Type ".help" for more information.
+> require("crypto").randomBytes(64).toString('hex')
