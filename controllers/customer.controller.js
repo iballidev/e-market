@@ -23,7 +23,7 @@ const addCustomer = async (req, res, next) => {
         address: data.address
     });
     customer = await customer.save();
-    res.redirect('/');
+    res.redirect('/customers');
 }
 
 const getUpdateCustomerView = async (req, res, next) => {
@@ -52,7 +52,7 @@ const updateCustomer = async(req, res, next) => {
     }, {new: true});
     if(!customer) return res.status(404).send('Customer with the given id not found');
 
-    res.redirect('/');
+    res.redirect('/customers');
 }
 
 const getDeleteCustomerView = async (req, res, next) => {
@@ -72,7 +72,7 @@ const deleteCustomer = async (req, res, next) => {
         const id = req.params.id;
         const customer = await Customer.findByIdAndRemove(id);
         if(!customer) return res.status(404).send('Customer with the given id not found');
-        res.redirect('/');        
+        res.redirect('/customers');        
     } catch (error) {
         res.status(400).send(error.message);
     }

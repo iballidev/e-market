@@ -27,8 +27,8 @@
                         <td><%= customer.phonenumber %></td>
                         <td><%= customer.cnic %></td>
                         <td>
-                            <a href="/updateCustomer/<%= customer._id %>" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                            <a href="/deleteCustomer/<%= customer._id %>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                            <a href="/customers/update/<%= customer._id %>" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                            <a href="/customers/delete/<%= customer._id %>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     <% } %>

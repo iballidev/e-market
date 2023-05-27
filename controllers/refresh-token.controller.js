@@ -8,7 +8,6 @@ const handleRefreshToken = (req, res, next) => {
   if (!cookies?.jwt) return res.sendStatus(401);
   const refreshToken = cookies.jwt;
 
-
   /**Check data base for user refreshToken and compare */
 
   /** */
@@ -18,8 +17,11 @@ const handleRefreshToken = (req, res, next) => {
     if (err) return res.sendStatus(403);
     const accessToken = jwt.sign(
       {
-        email: decode.email,
-        userId: decode._id,
+        userInfo: {
+          email: decode.email,
+          userId: decode._id,
+          roles: decode?.roles,
+        },
       },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "1h" }

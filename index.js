@@ -12,9 +12,11 @@ const app = express();
 /**ROUTES */
 const signupRoutes = require("./routes/signup.routes");
 const authRoutes = require("./routes/auth.routes");
-const customerRoutes = require("./routes/customer.routes");
 const refreshTokenRoutes = require("./routes/refresh-token.routes");
 const logoutRoutes = require("./routes/logout.routes");
+const customerRoutes = require("./routes/customer.routes");
+const userRoutes = require("./routes/user.routes");
+
 const credentials = require("./middleware/credentials");
 const corsOptions = require("./config/cors-options");
 
@@ -22,8 +24,8 @@ require("./startup/db")();
 require("./startup/logging")();
 require("./startup/validations")();
 
-app.use(expressLayoutes);
 app.set("view engine", "ejs");
+app.use(expressLayoutes);
 
 /**Built-in middleware to handle urlencoded form data */
 app.use(express.urlencoded({ extended: true }));
@@ -46,8 +48,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/signup", signupRoutes.routes);
 app.use("/auth", authRoutes.routes);
 app.use("/refresh-token", refreshTokenRoutes.routes);
-app.use("/rlogout", logoutRoutes.routes);
+app.use("/logout", logoutRoutes.routes);
 app.use("/customers", customerRoutes.routes);
+app.use("/user-list", userRoutes.routes);
+
 app.use(err);
 
 app.listen(config.port, () =>

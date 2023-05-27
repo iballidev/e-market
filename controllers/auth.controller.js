@@ -29,8 +29,11 @@ exports.login_user = (req, res) => {
         .then(() => {
           let accessToken = jwt.sign(
             {
-              email: user[0].email,
-              userId: user[0]._id,
+              userInfo: {
+                email: user[0]?.email,
+                userId: user[0]?._id,
+                roles: user[0]?.roles,
+              },
             },
             process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: "1h" }
@@ -48,7 +51,7 @@ exports.login_user = (req, res) => {
 
           res.cookie("jwt", refreshToken, {
             httpOnly: true,
-            sameSite: 'None',
+            sameSite: "None",
             secure: true,
             maxAge: 24 * 60 * 60 * 1000,
           });

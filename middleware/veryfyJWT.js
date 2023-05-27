@@ -6,8 +6,9 @@ dotenv.config();
 
 const verifyJWT = (req, res, next) => {
   console.log("request headers: ", req.headers);
-  const authHeader = req.headers["authorization"];
-  if (!authHeader) return res.sendStatus(401);
+  // const authHeader = req.headers["authorization"];
+  const authHeader = req.headers.authorization || req.headers.Authorization;
+  if (!authHeader?.startsWith("Bearer ")) return res.sendStatus(401);
   console.log("*: " + authHeader); //Bearer token
 
   const token = authHeader.split(" ")[1];
@@ -18,7 +19,8 @@ const verifyJWT = (req, res, next) => {
     (err, decoded) => {
       console.log("decoded: ", decoded);
       if (err) return res.sendStatus(403); //"forbidden(403): Invalid token"
-      req.user = decoded.username;
+      req.user = decoded.userInfo.username;
+      req.roles = decoded.userInfo.roles;
       next();
     }
   );
