@@ -11,13 +11,13 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div> -->
-          <% if (successMessage) { %>
-            <div class="alert alert-dismissible alert-success">
+          <% if (errorMessage) { %>
+            <div class="alert alert-dismissible alert-danger">
                 <!-- <button type="button" class="close" data-bs-dismiss="alert">
                     <i class="bi bi-x"></i>
                     <span aria-hidden="true">&times;</span>
                 </button> -->
-                <strong>Success!</strong> <%= successMessage %> <a href="/auth" class="alert-link">Login</a>.
+                <%= errorMessage %>
             </div>
         <% } %>
         <form action="/signup" method="post">

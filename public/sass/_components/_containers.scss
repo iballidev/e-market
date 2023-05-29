@@ -1,0 +1,25 @@
+.main-wrapper {
+  // --max-width: 1440px;
+  // --padding: 1rem;
+  // width: min(var(--max-width), 100% - (var(--padding) * 2));
+  // margin-inline: auto;
+}
+
+.container {
+  // --max-width: 1280px;
+  // --max-width: 1200px;
+  --max-width: 1100px;
+  --padding: 1rem;
+  width: min(var(--max-width), 100% - (var(--padding) * 2));
+  margin-inline: auto;
+}
+
+.gray-bg{
+  background-color: var(--clr-accent-400);
+}
+
+.rainbow-type-bg{
+  background-image: url(../images/rainbow-type-bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}

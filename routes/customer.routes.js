@@ -8,7 +8,6 @@ const {
   getDeleteCustomerView,
   deleteCustomer,
 } = require("../controllers/customer.controller");
-const verifyJWT = require("../middleware/veryfyJWT");
 const verifyRoles = require("../middleware/verify-roles");
 const ROLE_LIST = require("../config/role-list");
 
@@ -41,14 +40,8 @@ router.post(
 
   addCustomer
 );
-router.get(
-  "/update/:id",
-  getUpdateCustomerView
-);
-router.post(
-  "/update/:id",
-  updateCustomer
-);
+router.get("/update/:id", getUpdateCustomerView);
+router.post("/update/:id", updateCustomer);
 router.get("/delete/:id", getDeleteCustomerView);
 router.post("/delete/:id", deleteCustomer);
 

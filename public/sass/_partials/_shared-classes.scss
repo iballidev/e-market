@@ -1,0 +1,76 @@
+@use "../_abstracts/colors";
+@use "../_abstracts/typography";
+@use "../_partials/mixins";
+
+/* SHARED CLASSES */
+
+.even-columns {
+  display: grid;
+  gap: 1rem;
+
+  @include mixins.minmq(50em) {
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+  }
+}
+
+.img-fluid {
+  width: 100%;
+}
+
+.list-style-none {
+  list-style: none;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}
+
+a {
+  transition: all 400ms ease-in-out;
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 1000ms ease-in-out;
+  &.appear {
+    opacity: 1;
+  }
+}
+
+.from-left,
+.from-right,
+.from-bottom  {
+  transition: transform 800ms ease-in-out;
+  position: absolute;
+  &.appear {
+    position: relative;
+    transform: translateX(0);
+  }
+}
+
+.from-left {
+  transform: translateX(-50%);
+}
+.from-right {
+  transform: translateX(50%);
+}
+
+.from-bottom {
+  transform: translateY(-50%);
+}
+
+.toolbar.sticky-top {
+  top: -100px;
+  transition: .5s;
+}
+
+.bg-primary-500{
+  &:hover{
+    background-color: var(--clr-primary-600);
+  }
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}

@@ -1,0 +1,110 @@
+:root {
+  /* COLORS */
+  --clr-primary-500: hsl(108, 93%, 29%); //#208d05;
+  --clr-primary-600: hsl(97, 58%, 24%); //#345F19;
+  --clr-primary-700: hsl(0, 0%, 36%); //#5b5b5b;
+
+  --clr-accent-50: #c3c3c3; //#C3C3C3;
+  --clr-accent-300: hsl(214, 37%, 96%); //#F2F5F9;
+  --clr-accent-400: hsl(0, 0%, 95%); //#F3F3F3;
+  --clr-accent-500: hsl(216, 42%, 95%); //#eef2f8;
+  --clr-accent-600: hsl(0, 0%, 85%); //#D9D9D9;
+  --clr-accent-700: #c4c4c4; //#C4C4C4;
+
+  --clr-neutral-500: #ffffff;
+  --clr-secondary-500: hsl(114, 28%, 14%); //#1b2c19;
+
+  --clr-alt-100: hsl(277, 93%, 29%); //#59058D;
+  --clr-alt-200: hsl(223, 70%, 63%); //#5F84E3;
+
+  --base-text-color-100: var(--clr-accent-700);
+  --base-text-color-200: var(--clr-accent-600);
+  --base-text-color-500: var(--clr-primary-700);
+  --base-text-color: var(--clr-secondary-500);
+
+  /* TYPOGRAPHY */
+  @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@400;700&display=swap");
+
+  // @font-face {
+  //   font-family: "klavika_basicregular";
+  //   src: url("../assets/fonts/klavikabasic-regular-webfont.woff")
+  //       format("woff"),
+  //     url("../assets/fonts/klavikabasic-regular-webfont.woff2")
+  //       format("woff");
+  //   font-weight: normal;
+  //   font-style: normal;
+  // }
+
+  // @font-face {
+  //   font-family: "klavikabold";
+  //   // src: url("klavika-bold-webfont.woff2") format("woff2"),
+  //   //   url("klavika-bold-webfont.woff") format("woff");
+  //   src: url("../assets/fonts/klavika-bold-webfont.woff2") format("woff2"),
+  //     url("../assets/fonts/klavika-bold-webfont.woff") format("woff");
+  //   font-weight: normal;
+  //   font-style: normal;
+  // }
+
+  // --ff-primary: Klavika Basic;
+
+  --ff-primary: "Open Sans", sans-serif;
+  --ff-secondary: "Poppins", sans-serif;
+  //   --ff-accent: ;
+  --ff-body: var(--ff-primary);
+  //   --ff-heading: var(--ff-accent);
+
+  /* FONT SIZES */
+  --fs-50: 0.81rem; /*13px*/
+  --fs-100: 0.88rem; /*14px*/
+  --fs-150: 0.94rem; /*15px*/
+  --fs-200: 1rem; /*16px*/
+  --fs-300: 1.38rem; /*22px*/
+  --fs-400: 1.56rem; /*25px*/
+  --fs-500: 2.5rem; /*40px*/
+  --fs-600: 4.38rem; /*70px*/
+
+  --fs-nav: var(--fs-150);
+  --fs-body: var(--fs-200);
+  --fs-hero-title: var(--fs-600);
+  --fs-section-headline: var(--fs-500);
+  --fs-section-title: var(--fs-300);
+  --fs-card-body: var(--fs-50);
+  --fs-footer-body: var(--fs-50);
+  --fs-button: var(--fs-150);
+
+  /* SIZES */
+  --size-200: 0.2rem;
+  --size-250: 0.313rem; /* 5px */
+  --size-300: 0.5rem;
+  --size-400: 1rem;
+  --size-500: 1.5rem;
+  --size-600: 2rem;
+
+  /* FONT WEIGHT */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-semi-bold: 600;
+  --fw-bold: 700;
+}
+
+@media (max-width: 50em) {
+  :root {
+    // --fs-nav: var(--fs-400);
+    // --fs-body: var(--fs-450);
+    --fs-hero-title: var(--fs-500);
+    --fs-section-headline: var(--fs-300);
+    --fs-section-title: var(--fs-100);
+    // --fs-primary-heading: var(--fs-800);
+    // --fs-hero-heading: var(--fs-850);
+    // --fs-button: var(--fs-350);
+
+    --size-400: 0.6rem;
+    --size-500: 1.1rem;
+    --size-600: 1.7rem;
+
+    --fs-400: 1.3rem;
+    --fs-500: 2.1rem;
+    --fs-600: 2.7rem;
+    --fs-button: var(--fs-100);
+  }
+}

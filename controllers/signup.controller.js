@@ -1,10 +1,11 @@
 // const { User } = require("../models/signup.model");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const User = require("../models/signup.model");
+const User = require("../models/user.model");
 
 var data = {
   successMessage: null,
+  errorMessage: null,
 };
 
 exports.signup_user_view = (req, res, next) => {
@@ -21,8 +22,12 @@ exports.signup_user = (req, res, next) => {
     .exec()
     .then((user) => {
       if (user.length >= 1) {
-        return res.status(409).json({
-          message: "email/username already exist!",
+        // return res.status(409).json({
+        //   message: "email/username already exist!",
+        // });
+        return res.render("signup-user", {
+          ...data,
+          errorMessage: "email/username already exist!",
         });
       } else {
         bcrypt.hash(plaintextPassword, saltRoud, (err, hash) => {
@@ -44,15 +49,20 @@ exports.signup_user = (req, res, next) => {
                 // res.status(201).json({
                 //   message: "user registered",
                 // });
-                res.render("signupUser", {
-                  ...data,
-                  successMessage: "user registered",
-                });
+                res.redirect("/auth");
+                // res.render("login-user", {
+                //   ...data,
+                //   successMessage: "user registered",
+                // });
               })
               .catch((err) => {
                 console.log("Error: ", err);
-                res.status(500).json({
-                  message: "Something went wrong!",
+                // res.status(500).json({
+                //   message: "Something went wrong!",
+                // });
+                return res.render("signup-user", {
+                  ...data,
+                  errorMessage: "Something went wrong!",
                 });
               });
           }
@@ -61,8 +71,12 @@ exports.signup_user = (req, res, next) => {
     })
     .catch((err) => {
       console.log("Error: ", err);
-      res.status(500).json({
-        message: "Something went wrong!",
+      // res.status(500).json({
+      //   message: "Something went wrong!",
+      // });
+      return res.render("signup-user", {
+        ...data,
+        errorMessage: "Something went wrong!",
       });
     });
 };

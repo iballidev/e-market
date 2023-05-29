@@ -12,6 +12,7 @@ const app = express();
 /**ROUTES */
 const signupRoutes = require("./routes/signup.routes");
 const authRoutes = require("./routes/auth.routes");
+const userAccountRoutes = require("./routes/user-account.routes");
 const refreshTokenRoutes = require("./routes/refresh-token.routes");
 const logoutRoutes = require("./routes/logout.routes");
 const customerRoutes = require("./routes/customer.routes");
@@ -19,6 +20,7 @@ const userRoutes = require("./routes/user.routes");
 
 const credentials = require("./middleware/credentials");
 const corsOptions = require("./config/cors-options");
+const verifyJWT = require("./middleware/veryfyJWT");
 
 require("./startup/db")();
 require("./startup/logging")();
@@ -47,10 +49,12 @@ app.use(express.static(path.join(__dirname, "public")));
  */
 app.use("/signup", signupRoutes.routes);
 app.use("/auth", authRoutes.routes);
+app.use("/user-account", userAccountRoutes.routes);
 app.use("/refresh-token", refreshTokenRoutes.routes);
 app.use("/logout", logoutRoutes.routes);
-app.use("/customers", customerRoutes.routes);
 app.use("/user-list", userRoutes.routes);
+// app.use(verifyJWT);
+app.use("/customers", customerRoutes.routes);
 
 app.use(err);
 

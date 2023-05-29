@@ -1,0 +1,6 @@
+@use "../_partials/mixins";
+
+
+@include mixins.minmq(50em) {
+  
+}

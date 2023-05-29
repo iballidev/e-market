@@ -1,0 +1,11 @@
+@use "../_partials/mixins";
+
+.btn{
+  &:focus,
+  &:focus-visible,
+  &:active{
+    outline: 0;
+    box-shadow: none;
+    // border-color: unset;
+  }
+}
