@@ -7,25 +7,26 @@ const path = require("path");
 dotenv.config();
 
 const verifyJWT = async (req, res, next) => {
-  /**reading the access token from the client-access-token.txt file */
-  await fs.readFile(
-    path.join(__dirname, "../config", "client-access-token.txt"),
-    "utf-8",
-    (err, data) => {
-      if (!data) return null;
-      const authHeader = data; //Bearer token
+  console.log("my session: ", req.session.accessToken);
+  if (!req.session.accessToken) return res.redirect("/auth");
+  const authHeader = req.session.accessToken; //Bearer token
 
-      const token = authHeader.split(" ")[1];
+  const token = authHeader.split(" ")[1];
 
-      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-        if (err || !decoded) return res.redirect("/auth"); //"forbidden(403): Invalid token, redirect to login"
-        req.user = decoded.userInfo.username;
-        req.roles = decoded.userInfo.roles;
-        next();
-      });
-      if (err) throw err;
-    }
-  );
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+    console.log("err: ", err);
+
+    // if (err || !decoded) return res.sendStatus(403);
+
+    if (err || !decoded) return res.redirect("/auth"); //"forbidden(403): Invalid token, redirect to login"
+
+    console.log("veryfyToken decoded: ", decoded);
+    req.user = decoded.userInfo.email;
+    req.userId = decoded.userInfo._id;
+    req.roles = decoded.userInfo.roles;
+    req.session.user = decoded;
+    next();
+  });
 };
 
 module.exports = verifyJWT;

@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const config = require("./startup/config");
 const winston = require("winston");
 const cookieParser = require("cookie-parser");
+// var session = require("express-session");
+var cookieSession = require("cookie-session");
 const err = require("./middleware/errors");
 const app = express();
 
@@ -21,6 +23,9 @@ const userRoutes = require("./routes/user.routes");
 const credentials = require("./middleware/credentials");
 const corsOptions = require("./config/cors-options");
 const verifyJWT = require("./middleware/veryfyJWT");
+const {
+  handleRefreshToken,
+} = require("./controllers/refresh-token.controller");
 
 require("./startup/db")();
 require("./startup/logging")();
@@ -36,12 +41,23 @@ app.use(express.urlencoded({ extended: true }));
  * and fetch cookies credentials requirement
  */ app.use(credentials);
 
-
- /**Cross Origin Resource Sharing */
+/**Cross Origin Resource Sharing */
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.use(cookieParser());
+app.use(
+  cookieSession({
+    name: "session",
+    keys: [
+      /* secret keys */
+      "hello",
+    ],
+
+    // Cookie Options
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  })
+);
 app.use(express.static(path.join(__dirname, "public")));
 
 /**We can import like this: app.use(signupRoutes);
@@ -49,11 +65,11 @@ app.use(express.static(path.join(__dirname, "public")));
  */
 app.use("/signup", signupRoutes.routes);
 app.use("/auth", authRoutes.routes);
-app.use("/user-account", userAccountRoutes.routes);
 app.use("/refresh-token", refreshTokenRoutes.routes);
 app.use("/logout", logoutRoutes.routes);
+app.use(verifyJWT);
+app.use("/user-account", userAccountRoutes.routes);
 app.use("/user-list", userRoutes.routes);
-// app.use(verifyJWT);
 app.use("/customers", customerRoutes.routes);
 
 app.use(err);

@@ -10,14 +10,14 @@ const handleRefreshToken = async (req, res, next) => {
   const cookies = req.cookies;
 
   console.log("hello", cookies);
-  console.log("hello jwt", cookies.jwt);
+  console.log("hello jwt", cookies?.jwt);
   if (!cookies?.jwt) return res.sendStatus(401);
   const refreshToken = cookies.jwt;
 
   /**Check data base for user refreshToken and compare */
   const foundUser = await User.findOne({ refreshToken }).exec();
-  console.log("foundUser: ", foundUser);
-  if(!foundUser) return res.sendStatus(403); // forbidden
+  console.log("foundUser++: ", foundUser);
+  if (!foundUser) return res.sendStatus(403); // forbidden
   /** */
 
   /**Verify refreshToken and assign new accessToken */
@@ -42,14 +42,19 @@ const handleRefreshToken = async (req, res, next) => {
 
     /**save for server side */
     /** Write(save) new access token inside the 'client-access-token.txt' file */
-    fs.writeFile(
-      path.join(__dirname, "../config", "client-access-token.txt"),
-      `Bearer ${accessToken}`,
-      (err) => {
-        res.redirect("/user-account");
-        if (err) throw err;
-      }
-    );
+    // fs.writeFile(
+    //   path.join(__dirname, "../config", "client-access-token.txt"),
+    //   `Bearer ${accessToken}`,
+    //   (err) => {
+    //     res.redirect("/user-account");
+    //     if (err) throw err;
+    //   }
+    // );
+
+    /** Store(save) new access token inside the seesion */
+    req.session.accessToken = `Bearer ${accessToken}`;
+    console.log("accessToken: ", accessToken);
+    res.sendStatus(200);
   });
 };
 
