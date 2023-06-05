@@ -2938,3 +2938,6 @@
 {"level":"info","message":"App is listening on url http://localhost:8080","timestamp":"2023-06-04T22:22:05.664Z"}
 {"level":"info","message":"connecting...","timestamp":"2023-06-04T22:22:05.725Z"}
 {"level":"info","message":"MongoDb connected successfully!","timestamp":"2023-06-04T22:22:05.726Z"}
+{"level":"info","message":"App is listening on url http://localhost:8080","timestamp":"2023-06-05T05:39:39.667Z"}
+{"level":"info","message":"connecting...","timestamp":"2023-06-05T05:39:39.730Z"}
+{"level":"info","message":"MongoDb connected successfully!","timestamp":"2023-06-05T05:39:39.731Z"}
