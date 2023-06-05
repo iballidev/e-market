@@ -17,14 +17,19 @@ exports.get_user = async (req, res, next) => {
   //   const list = await Customer.find().exec();
   if (user) {
     console.log("loggedin user: ", true);
-    return res.status(200).json({
+    // return res.status(200).json({
+    //   user: user,
+    // });
+    return res.render("header", {
       user: user,
     });
   }
-  console.log("loggedin user: ", false);
-  console.log("loggedin user: ", false);
-  return res.status(500).json({
-    user: null,
-    message: "no data found"
-  });
+
+  return;
+  // console.log("loggedin user: ", false);
+  // console.log("loggedin user: ", false);
+  // return res.status(500).json({
+  //   user: null,
+  //   message: "no data found"
+  // });
 };

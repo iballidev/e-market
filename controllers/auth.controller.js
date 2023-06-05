@@ -256,18 +256,7 @@ exports.login_user = (req, res) => {
 
             // Save refreshToken in db
             user[0].refreshToken = refreshToken;
-            // const result =
             user[0].save();
-            // console.log("user: ", user);
-
-            // user[0]
-            //   .save()
-            //   .then((result) => {
-            //     console.log("result***: ", result);
-            //   })
-            //   .catch((err) => {
-            //     console.log("Error: ", err);
-            //   });
 
             res.cookie("jwt", refreshToken, {
               httpOnly: true,
