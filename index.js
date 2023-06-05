@@ -63,6 +63,20 @@ app.use(express.static(path.join(__dirname, "public")));
 /**We can import like this: app.use(signupRoutes);
  * OR like this: app.use(signupRoutes.routes);
  */
+app.use(function (req, res, next) {
+  console.log("req.locals sessions: ", req.session);
+  console.log("req.locals cookie.jwt: ", req.cookies.jwt);
+  if (req.session.user) {
+    res.locals.isAuthenticated = req.session.user;
+    console.log("res.locals 1: ", res.locals.isAuthenticated);
+  } else {
+    res.locals.isAuthenticated = null;
+    console.log("res.locals 2: ", res.locals.isAuthenticated);
+    // res.locals.isAuthenticated = req.isAuthenticated();
+  }
+  next();
+});
+
 app.use("/signup", signupRoutes.routes);
 app.use("/auth", authRoutes.routes);
 app.use("/refresh-token", refreshTokenRoutes.routes);
